@@ -186,6 +186,41 @@ class User{
         return openssl_decrypt($encrypted_data, 'aes-256-cbc', $encryption_key, 0, $iv);
     }
 
+    public function register($email,$fullname,$password){
+
+        $email      = filter_var(strip_tags(trim($email)),FILTER_SANITIZE_EMAIL);
+        // Random password if password is empty value
+        $password   = (empty($password)?hash('sha512',uniqid(mt_rand(1,mt_getrandmax()),true)):$password);
+        $salt       = hash('sha512',uniqid(mt_rand(1,mt_getrandmax()),true));
+        // Create salted password
+        $password   = hash('sha512',$password.$salt);
+
+        $name = explode(' ',strip_tags(trim($fullname)));
+        $fname = trim($name[0]);
+        $lname = trim($name[1]);
+
+        if($this->userAlready($email)){
+            parent::query('INSERT INTO user(email,fname,lname,password,salt,type,ip,register_time,visit_time) VALUE(:email,:fname,:lname,:password,:salt,:type,:ip,:register_time,:visit_time)');
+            parent::bind(':email'       ,$email);
+            parent::bind(':fname'       ,$fname);
+            parent::bind(':lname'       ,$lname);
+            parent::bind(':password'    ,$password);
+            parent::bind(':salt'        ,$salt);
+            parent::bind(':type'        ,1); // 1 = Normal
+            parent::bind(':ip'          ,parent::GetIpAddress());
+            parent::bind(':register_time' ,date('Y-m-d H:i:s'));
+            parent::bind(':visit_time'  ,date('Y-m-d H:i:s'));
+            parent::execute();
+
+            $user_id = parent::lastInsertId();
+
+        }else{
+            return 0;
+        }
+
+        return $user_id;
+    }
+
   //   public function listContent($article_id){
   //   	$this->db->query('SELECT * FROM content WHERE article_id = :article_id AND status = "active" ORDER BY position ASC');
 		// $this->db->bind(':article_id',$article_id);

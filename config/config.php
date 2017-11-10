@@ -5,7 +5,7 @@ define("DB_NAME" 	,"mydb");
 define("DB_USER"	,"admin");
 define("DB_PASS" 	,"1234");
 
-define("DOMAIN" 	,"pm.local");
+define("DOMAIN" 	,"pm.local/projectmanage");
 
 // SITE SETUP
 define("TITLE" 		,'Project Manage');
