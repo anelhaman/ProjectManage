@@ -1,13 +1,16 @@
 <?php  
 require_once 'autoload.php';
-$tel = isset($_REQUEST['tel']) ? $_REQUEST['tel'] : null;
-$password = isset($_REQUEST['password']) ? $_REQUEST['password'] : null;
-$name = isset($_REQUEST['name']) ? $_REQUEST['name'] : null;
-$lastname = isset($_REQUEST['lastname']) ? $_REQUEST['lastname'] : null;
+
+
+$u = $_REQUEST['username'];
+$p = $_REQUEST['password'];
+
+
 ?>
 
 <!DOCTYPE html>
 <html lang="en">
+
 <!-- Meta Tag -->
 <meta charset="utf-8">
 
@@ -24,39 +27,20 @@ $lastname = isset($_REQUEST['lastname']) ? $_REQUEST['lastname'] : null;
 </head>
 <body>
 
-
 <?php include_once'header.php';?>
 
 	<div class="container">
 
-				<!-- Form Name -->
-				<legend>รายการ</legend>
+	<?php
 
-				
-					<?php
+	$state = $user->checkLogin($u,$p); 
 
-
-					if($tel == null || $password == null || $name == null || $lastname == null)
-					{
-						echo "invalid var!";
-						header('Location:./Login.php');
-						
-
-
-					}else{
-						$user_id = $user->register($tel,$password,$name,$lastname);
-
-						echo "you can login with Username :".$user_id;
-
-
-						
-
-
-					}
-
-
-					?>
+	echo $state;
 	
+
+	?>
 	</div>
+
 	</body>
+
 	</html>

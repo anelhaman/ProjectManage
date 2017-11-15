@@ -26,7 +26,7 @@ require_once 'autoload.php';
 
 	
 	<div class="container">
-		<form class="form-horizontal">
+		<form class="form-horizontal" action='checklogin.php'>
 			<fieldset>
 
 			<!-- Form Name -->
@@ -36,7 +36,7 @@ require_once 'autoload.php';
 			<div class="form-group">
 			  <label class="col-md-4 control-label" for="username"></label>  
 			  <div class="col-md-5">
-			  <input id="username" name="username" type="text" placeholder="Username" class="form-control input-md" required="">
+			  <input id="username" name="username" type="number" placeholder="กรอกเบอร์โทรศัพท์" class="form-control input-md" required="">
 			    
 			  </div>
 			</div>
@@ -45,7 +45,7 @@ require_once 'autoload.php';
 			<div class="form-group">
 			  <label class="col-md-4 control-label" for="password"></label>  
 			  <div class="col-md-5">
-			  <input id="password" name="password" type="text" placeholder="Password" class="form-control input-md" required="">
+			  <input id="password" name="password" type="password" placeholder="Password" class="form-control input-md" required="">
 			    
 			  </div>
 			</div>
@@ -54,7 +54,7 @@ require_once 'autoload.php';
 			<div class="form-group">
 			  <label class="col-md-4 control-label" for="login"></label>
 			  <div class="col-md-8">
-			    <button id="login" name="login" class="btn btn-success">Login</button>
+			    <button id="login" name="" class="btn btn-success">Login</button>
 			    <a href="register.php" id="register" name="register" class="btn btn-info">Register</a>
 			  </div>
 			</div>

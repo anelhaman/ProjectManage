@@ -1,0 +1,11 @@
+.container #content {
+  width: 50%;
+  display: block-inline;
+  margin: 20%;
+}
+.container #content #header {
+  width: 100;
+}
+.container #content #body {
+  width: 100;
+}

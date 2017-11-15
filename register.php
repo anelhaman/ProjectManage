@@ -28,7 +28,7 @@ require_once 'autoload.php';
 
 	
 	<div class="container">
-			<form class="form-horizontal">
+			<form class="form-horizontal" action="added.php" method="get">
 				<fieldset>
 
 				<!-- Form Name -->
@@ -36,9 +36,9 @@ require_once 'autoload.php';
 
 				<!-- Text input-->
 				<div class="form-group">
-				  <label class="col-md-4 control-label" for="uid">เบอร์โทร</label>  
+				  <label class="col-md-4 control-label" for="tel">เบอร์โทร</label>  
 				  <div class="col-md-5">
-				  <input id="uid" name="uid" type="text" placeholder="กรอกเบอร์โทร" class="form-control input-md" required="">
+				  <input id="tel" name="tel" type="number" placeholder="กรอกเบอร์โทร" class="form-control input-md" required="" maxlength="10">
 				    
 				  </div>
 				</div>
@@ -74,15 +74,16 @@ require_once 'autoload.php';
 				<div class="form-group">
 				  <label class="col-md-4 control-label" for="submit"></label>
 				  <div class="col-md-4">
-				    <button id="submit" name="submit" class="btn btn-info">ยืนยัน</button>
+				    <button id="submit" class="btn btn-info">ยืนยัน</button>
 				  </div>
 				</div>
 
 				</fieldset>
 				</form>
 
-
 	</div>
+
+	
 	
 </body>
 </html>

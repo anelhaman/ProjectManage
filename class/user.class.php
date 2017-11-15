@@ -1,12 +1,9 @@
 <?php
 class User{
-	public $id;
-	public $username;
+	public $tel;
+    private $password;
 	public $name;
-    public $prename;
-	public $cid;
-	private $password;
-    private $key = 'bRuD5WYw5wd0rdHR9yLlM6wt2vteuiniQBqE70nAuhU=';
+    public $lastname;
 
 	private $db;
 
@@ -104,50 +101,16 @@ class User{
         }
     }
 
-    public function login($username,$password){
-        // $email          = filter_var(strip_tags(trim($email)),FILTER_SANITIZE_EMAIL);
-        $username 		= trim($username);
-        $password       = trim($password);
-        $cookie_time    = time() + 3600 * 24 * 12; // Cookie Time (1 year)
+    private function login($tel,$password)
+    {
 
-        // GET USER DATA BY EMAIL
-        $this->db->query('SELECT ID_CARD cid,password FROM member WHERE username = :username');
-		$this->db->bind(':username',$username);
-		$this->db->execute();
-		$user_data = $this->db->single();
 
-		if(true){
-			if($password == $user_data['password']){
-				// PASSWORD IS CORRECT!
-				$user_browser = $_SERVER['HTTP_USER_AGENT'];
 
-				// XSS protection as we might print this value
-				$user_id = preg_replace("/[^0-9]+/",'',$user_data['cid']);
-				// Encrypt UserID before send to cookie.
-				$user_id = $this->Encrypt($user_id);
 
-				// SET SESSION AND COOKIE
-				$_SESSION['user_id'] = $user_id;
-				setcookie('user_id',$user_id,$cookie_time);
-				$_SESSION['login_string'] = hash('sha512',$user_data['password'].$user_browser);
-				setcookie('login_string',hash('sha512',$user_data['password'].$user_browser),$cookie_time);
 
-				// Save log to attempt : [successful]
-				// parent::recordAttempt($user_data['id'],'successful');
+        return 1;
 
-				return 1; // LOGIN SUCCESS
-			}else{
-				// Save log to attempt : [fail]
-				// if(!empty($user_data['id'])){
-				// 	$this->recordAttempt($user_data['id']); // Login failure!
-				// }
 
-				return 0; // LOGIN FAIL!
-			}
-		}else{
-			return -1; // ACCOUNT LOCKED!
-		}
-        // Note: crypt — One-way string hashing (http://php.net/manual/en/function.crypt.php)
     }
 
     // private function Encrypt($data){
@@ -186,39 +149,99 @@ class User{
         return openssl_decrypt($encrypted_data, 'aes-256-cbc', $encryption_key, 0, $iv);
     }
 
-    public function register($email,$fullname,$password){
+    public function register($tel,$password,$name,$lastname){
 
-        $email      = filter_var(strip_tags(trim($email)),FILTER_SANITIZE_EMAIL);
-        // Random password if password is empty value
-        $password   = (empty($password)?hash('sha512',uniqid(mt_rand(1,mt_getrandmax()),true)):$password);
-        $salt       = hash('sha512',uniqid(mt_rand(1,mt_getrandmax()),true));
-        // Create salted password
-        $password   = hash('sha512',$password.$salt);
+        
+      
 
-        $name = explode(' ',strip_tags(trim($fullname)));
-        $fname = trim($name[0]);
-        $lname = trim($name[1]);
+        $password   = hash('sha512',$password);
 
-        if($this->userAlready($email)){
-            parent::query('INSERT INTO user(email,fname,lname,password,salt,type,ip,register_time,visit_time) VALUE(:email,:fname,:lname,:password,:salt,:type,:ip,:register_time,:visit_time)');
-            parent::bind(':email'       ,$email);
-            parent::bind(':fname'       ,$fname);
-            parent::bind(':lname'       ,$lname);
-            parent::bind(':password'    ,$password);
-            parent::bind(':salt'        ,$salt);
-            parent::bind(':type'        ,1); // 1 = Normal
-            parent::bind(':ip'          ,parent::GetIpAddress());
-            parent::bind(':register_time' ,date('Y-m-d H:i:s'));
-            parent::bind(':visit_time'  ,date('Y-m-d H:i:s'));
-            parent::execute();
+        if($this->userAlready($tel)){
+           $this->db->query('
+                INSERT INTO `mydb`.`user` (`tel`, `pass`, `name`, `last`, `time`) 
+                VALUES ( :tel, :password, :name, :lastname, :register_time);');
+            $this->db->bind(':tel'         ,$tel);
+            $this->db->bind(':password'    ,$password);
+            $this->db->bind(':name'        ,$name);
+            $this->db->bind(':lastname'    ,$lastname);
+            $this->db->bind(':register_time' ,date('Y-m-d H:i:s'));
+            $this->db->execute();
 
-            $user_id = parent::lastInsertId();
+            $user_id = $this->db->lastInsertId();
+
+            $userTel = $this->getTelfromId($user_id);
 
         }else{
             return 0;
         }
 
-        return $user_id;
+        return $userTel;
+    }
+    private function userAlready($tel){
+
+        $this->db->query('SELECT * FROM `user` WHERE tel = :tel');   
+        $this->db->bind(':tel',$tel); 
+        $this->db->execute();
+        $dataset = $this->db->single();
+        
+        if(empty($dataset['tel'])) return true;
+        else return false;
+    }
+     public function getTelfromId($id){
+
+        $this->db->query('SELECT tel FROM `user` WHERE id = :id');   
+        $this->db->bind(':id',$id); 
+        $this->db->execute();
+        $dataset = $this->db->single();
+        
+        return ($dataset['tel']); 
+    }
+     public function getIdfromTel($tel){
+
+        $this->db->query('SELECT id FROM `user` WHERE tel = :tel');   
+        $this->db->bind(':tel',$tel); 
+        $this->db->execute();
+        $dataset = $this->db->single();
+        
+        return ($dataset['id']); 
+    }
+    public function getPassfromId($id){
+
+        $this->db->query('SELECT * FROM `user` WHERE tel = :id');   
+        $this->db->bind(':id',$id); 
+        $this->db->execute();
+        $dataset = $this->db->single();
+        return $dataset['pass'];
+    }
+    public function checkLogin($user,$pass){
+
+        $this->db->query('SELECT * FROM `user` WHERE tel = :tel');
+        $this->db->bind(':tel',$user);
+        $this->db->execute();
+        $dataset = $this->db->single();
+
+        if($user != $dataset['tel']){
+            return -1; // username had not been installed before!
+        }else{
+
+
+            $passHash = $this->getPassfromId($user);
+
+            if (hash('sha512',$pass) == $passHash) {
+                # code...
+
+                Header ("Location:./index.php");
+                return 0; //ปกติ
+            }
+            else{
+                return -2;  // password incorrect!
+            }
+            
+            
+        }
+
+
+
     }
 
   //   public function listContent($article_id){
