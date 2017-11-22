@@ -1,6 +1,12 @@
 <?php  
 require_once 'autoload.php';
 
+if($user_online) {
+	header("Location: index.php");
+	exit(); 
+
+
+}
 ?>
 
 <!DOCTYPE html>
@@ -26,7 +32,7 @@ require_once 'autoload.php';
 
 	
 	<div class="container">
-		<form class="form-horizontal" action='checklogin.php'>
+		<form class="form-horizontal" action='checklogin.php' method="POST">
 			<fieldset>
 
 			<!-- Form Name -->
@@ -36,7 +42,7 @@ require_once 'autoload.php';
 			<div class="form-group">
 			  <label class="col-md-4 control-label" for="username"></label>  
 			  <div class="col-md-5">
-			  <input id="username" name="username" type="number" placeholder="กรอกเบอร์โทรศัพท์" class="form-control input-md" required="">
+			  <input id="username" name="username" type="number" placeholder="กรอกเบอร์โทรศัพท์" class="form-control input-md" required="" value="0957892522">
 			    
 			  </div>
 			</div>
@@ -55,7 +61,7 @@ require_once 'autoload.php';
 			  <label class="col-md-4 control-label" for="login"></label>
 			  <div class="col-md-8">
 			    <button id="login" name="" class="btn btn-success">Login</button>
-			    <a href="register.php" id="register" name="register" class="btn btn-info">Register</a>
+			    <a href="register.php" id="register" name="register" class="btn btn-link">Register</a>
 			  </div>
 			</div>
 

@@ -1,5 +1,6 @@
 <?php
 class User{
+    public $id;
 	public $tel;
     private $password;
 	public $name;
@@ -13,17 +14,19 @@ class User{
     }
 
     public function get($cid){
-    	$this->db->query('SELECT UserID,Username,Password,Name,ID_CARD FROM member WHERE ID_CARD = :cid');
+    	$this->db->query('SELECT * FROM user WHERE id = :cid');
 		$this->db->bind(':cid',$cid);
 		$this->db->execute();
 		$dataset = $this->db->single();
 
-		$this->id 		= $dataset['UserID'];
+		$this->id 		= $dataset['id'];
 		$this->username = $dataset['Username'];
 		$this->name 	= $dataset['Name'];
 		$this->cid 		= $dataset['ID_CARD'];
-		$this->password = $dataset['Password'];
-        $this->prename  = $this->getPrename($this->cid);
+		$this->password = $dataset['pass'];
+       //  $this->prename  = $this->getPrename($this->cid);
+
+        //print_r($dataset);
     }
 
     public function getPrename($cid){
@@ -81,12 +84,15 @@ class User{
             $login_string   = $_SESSION['login_string'];
 
             // Get the user-agent string of the user.
-            $user_browser   = $_SERVER['HTTP_USER_AGENT'];
+           // $user_browser   = $_SERVER['HTTP_USER_AGENT'];
 
-            $this->get($this->Decrypt($user_id));
+            $userid = $this->Decrypt($user_id);
 
-            if(!empty($this->cid)){
-                $login_check = hash('sha512',$this->password.$user_browser);
+            $this->get($userid);
+
+            if(!empty($this->id)){
+                $login_check = hash('sha512',$this->password);
+
 
                 if($login_check == $login_string){
                     return true;
@@ -101,17 +107,50 @@ class User{
         }
     }
 
-    private function login($tel,$password)
-    {
+    public function login($tel,$password){
+            // $email          = filter_var(strip_tags(trim($email)),FILTER_SANITIZE_EMAIL);
+        $username       = trim($username);
+        $password       = trim($password);
+        $password       = hash('sha512',$password);
+        $cookie_time    = time() + 3600 * 24 * 12; // Cookie Time (1 year)
 
+        // GET USER DATA BY EMAIL
+        $this->db->query('SELECT id,tel,pass FROM user WHERE tel = :tel');
+        $this->db->bind(':tel',$tel);
+        $this->db->execute();
+        $user_data = $this->db->single();
 
+        if(true){
+            if($password == $user_data['pass']){
+                // PASSWORD IS CORRECT!
+               // $user_browser = $_SERVER['HTTP_USER_AGENT'];
 
+                // XSS protection as we might print this value
+                $user_id = preg_replace("/[^0-9]+/",'',$user_data['id']);
+                // Encrypt UserID before send to cookie.
+                $user_id = $this->Encrypt($user_id);
 
+                // SET SESSION AND COOKIE
+                $_SESSION['user_id'] = $user_id;
+                setcookie('user_id',$user_id,$cookie_time);
+                $_SESSION['login_string'] = hash('sha512',$user_data['pass']);
+                setcookie('login_string',hash('sha512',$user_data['pass']),$cookie_time);
 
-        return 1;
+                // Save log to attempt : [successful]
+                // parent::recordAttempt($user_data['id'],'successful');
 
+                return 1; // LOGIN SUCCESS
+            }else{
+                // Save log to attempt : [fail]
+                // if(!empty($user_data['id'])){
+                //  $this->recordAttempt($user_data['id']); // Login failure!
+                // }
 
-    }
+                return 0; // LOGIN FAIL!
+            }
+        }else{
+            return -1; // ACCOUNT LOCKED!
+        }    }
 
     // private function Encrypt($data){
     //     $password = $this->cookie_salt;
@@ -212,36 +251,6 @@ class User{
         $this->db->execute();
         $dataset = $this->db->single();
         return $dataset['pass'];
-    }
-    public function checkLogin($user,$pass){
-
-        $this->db->query('SELECT * FROM `user` WHERE tel = :tel');
-        $this->db->bind(':tel',$user);
-        $this->db->execute();
-        $dataset = $this->db->single();
-
-        if($user != $dataset['tel']){
-            return -1; // username had not been installed before!
-        }else{
-
-
-            $passHash = $this->getPassfromId($user);
-
-            if (hash('sha512',$pass) == $passHash) {
-                # code...
-
-                Header ("Location:./index.php");
-                return 0; //ปกติ
-            }
-            else{
-                return -2;  // password incorrect!
-            }
-            
-            
-        }
-
-
-
     }
 
   //   public function listContent($article_id){

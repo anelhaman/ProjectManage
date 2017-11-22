@@ -1,9 +1,9 @@
 <?php  
 require_once 'autoload.php';
-$tel = isset($_REQUEST['tel']) ? $_REQUEST['tel'] : null;
-$password = isset($_REQUEST['password']) ? $_REQUEST['password'] : null;
-$name = isset($_REQUEST['name']) ? $_REQUEST['name'] : null;
-$lastname = isset($_REQUEST['lastname']) ? $_REQUEST['lastname'] : null;
+$tel = isset($_POST['tel']) ? $_POST['tel'] : null;
+$password = isset($_POST['password']) ? $_POST['password'] : null;
+$name = isset($_POST['name']) ? $_POST['name'] : null;
+$lastname = isset($_POST['lastname']) ? $_POST['lastname'] : null;
 ?>
 
 <!DOCTYPE html>
@@ -38,16 +38,31 @@ $lastname = isset($_REQUEST['lastname']) ? $_REQUEST['lastname'] : null;
 
 					if($tel == null || $password == null || $name == null || $lastname == null)
 					{
+						if ($tel.length == 10) {
+							echo "ใส่ user ไม่ถูกต้อง";
+						}
 						echo "invalid var!";
 						header('Location:./Login.php');
 						
 
 
 					}else{
-						$user_id = $user->register($tel,$password,$name,$lastname);
+						try {
+							$user_id = $user->register($tel,$password,$name,$lastname);
+							echo "<a class='btn btn-info' href='./'>กลับสู่หน้าหลัก</a><br>";
+							echo "<pre> ";
+							echo "ชื่อ-สกุล :".$name." '".$lastname."<br>" ;
+							echo "ลงทะเบียนผู้ใช้ ".$user_id." เรียบร้อยแล้ว</pre>";
 
-						echo "you can login with Username :".$user_id;
-
+							
+						} catch (Exception $e) {
+							
+							echo "<a class='btn btn-warning' href='./'>กลับสู่หน้าหลัก</a><br>";
+							echo "<pre> ไม่สามารถเพิ่มผู้ใช้ใหม่ได้ กรุณาติดต่อผู้ดูแลระบบ </pre>";
+							
+						}
+						
+						
 
 						
 

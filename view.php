@@ -1,7 +1,10 @@
 <?php  
 require_once 'autoload.php';
-
-
+if (!$user_online) {
+	# code...
+	header("Location:./login.php");
+	exit(); 
+}
 
 ?>
 
@@ -18,7 +21,11 @@ require_once 'autoload.php';
 
 <title><?php echo TITLE;?></title>
 
+
+<link rel="stylesheet" type="text/css" href="css/reset.css"/>
 <link rel="stylesheet" type="text/css" href="css/style.css"/>
+<link rel="stylesheet" type="text/css" href="css/test.css"/>
+
 <link rel="stylesheet" type="text/css" href="plugin/font-awesome/css/font-awesome.min.css"/>
 <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet">
 </head>
@@ -26,32 +33,39 @@ require_once 'autoload.php';
 
 <?php include_once'header.php';?>
 
-	
+							
 
-	<div class="container">
-  	<legend>รายการ</legend>
-  	 <div class="col-md-6">
-		  <table class="table table-hover col-md-4">
+	<div class="container" id="viewcontent">
+	<a class='btn btn-link' href='./'>กลับสู่หน้าหลัก</a><br>
+  	<H2>รายการ</H2>
+		  <table class="table table-hover ">
 
 		    <thead>
 		      <tr>
-		        <th>ลำดับ</th>
+		        <th id="num">ลำดับ</th>
 		        <th>ชื่อโครงการ</th>
 		      </tr>
 		    </thead>
 		    <tbody>
-		      <tr>
-		        <td>1</td>
-		        <td>aaaa</td>
-		      </tr>
-		      <tr>
-		        <td>2</td>
-		        <td>bbbbb</td>
-		      </tr>
-		      <tr>
-		        <td>3</td>
-		        <td>cccc</td>
-		      </tr>
+		    
+		    	<?php
+		    	$i=0;
+		    	$r = $project->getall();
+		    	foreach ($r as $key => $value) {
+		    		$i++;
+		    		?>
+
+		    		<tr>
+		    			<td><?php echo $i; ?></td>
+		    			<td><?php echo $value['name']; ?></td>
+		    		</tr>
+		    		<?php
+		    	}
+
+		    		
+
+
+		    	?>
 		    </tbody>
 
 		  </table>

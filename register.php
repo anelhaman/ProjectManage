@@ -1,8 +1,6 @@
 <?php  
 require_once 'autoload.php';
 
-
-
 ?>
 
 <!DOCTYPE html>
@@ -28,7 +26,7 @@ require_once 'autoload.php';
 
 	
 	<div class="container">
-			<form class="form-horizontal" action="added.php" method="get">
+			<form class="form-horizontal" action="added.php" method="POST">
 				<fieldset>
 
 				<!-- Form Name -->
@@ -38,7 +36,7 @@ require_once 'autoload.php';
 				<div class="form-group">
 				  <label class="col-md-4 control-label" for="tel">เบอร์โทร</label>  
 				  <div class="col-md-5">
-				  <input id="tel" name="tel" type="number" placeholder="กรอกเบอร์โทร" class="form-control input-md" required="" maxlength="10">
+				  <input id="tel" name="tel" type="number" maxlength="10" placeholder="กรอกเบอร์โทร" class="form-control input-md" required="" >
 				    
 				  </div>
 				</div>
@@ -47,7 +45,7 @@ require_once 'autoload.php';
 				<div class="form-group">
 				  <label class="col-md-4 control-label" for="password">รหัสผ่าน</label>
 				  <div class="col-md-5">
-				    <input id="password" name="password" type="password" placeholder="ตัวเลข 4 ตัว" class="form-control input-md" required="">
+				    <input id="password" name="password" type="password" placeholder="ตัวเลข 4 ตัว" class="form-control input-md" required="" maxlength="4">
 				    
 				  </div>
 				</div>

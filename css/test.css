@@ -1,5 +1,5 @@
 .container #content {
-  width: 50%;
+  width: 100%;
   display: block-inline;
   margin: 20%;
 }
@@ -8,4 +8,42 @@
 }
 .container #content #body {
   width: 100;
+}
+#viewcontent {
+  width: 80%;
+  margin: 10%;
+}
+#viewcontent table {
+  width: 100%;
+  margin-top: 50px;
+}
+#viewcontent table th {
+  text-align: center;
+}
+#viewcontent table td {
+  text-align: center;
+}
+#viewcontent table #num {
+  width: 20%;
+}
+#indexcontent {
+  width: 80%;
+  margin: 10%;
+}
+#indexcontent form {
+  width: 100%;
+  margin-top: 50px;
+}
+#indexcontent input {
+  margin: 2px;
+  float: left;
+}
+#indexcontent button {
+  margin: 2px;
+  float: right;
+}
+#indexcontent a {
+  margin: 2px;
+  text-decoration: none;
+  float: right;
 }

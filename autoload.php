@@ -14,6 +14,7 @@ require_once 'config/config.php';
 // require_once 'class/api.class.php';
 require_once 'class/database.class.php';
 require_once 'class/user.class.php';
+require_once 'class/project.class.php';
 // require_once 'class/money.class.php';
 // require_once 'class/log.class.php';
 
@@ -22,4 +23,7 @@ $user = new User;
 
 $user->sec_session_start();
 $user_online = $user->loginChecking();
+
+$project = new Project;
  ?>
+ 
