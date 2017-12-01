@@ -15,6 +15,7 @@ require_once 'config/config.php';
 require_once 'class/database.class.php';
 require_once 'class/user.class.php';
 require_once 'class/project.class.php';
+require_once 'class/activity.class.php';
 // require_once 'class/money.class.php';
 // require_once 'class/log.class.php';
 
@@ -23,7 +24,9 @@ $user = new User;
 
 $user->sec_session_start();
 $user_online = $user->loginChecking();
+$user_id = $user->getId();
 
 $project = new Project;
+$activity = new Activity();
  ?>
- 
+ <link href="https://fonts.googleapis.com/css?family=Taviraj" rel="stylesheet">

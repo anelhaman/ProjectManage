@@ -1,70 +1,207 @@
-.container {
+@import url('reset.less');
+@bodycolor : #FFF;
+@backgroundcolor : #bdc3c7;
 
-	#content{
-
-		width:100%;
-		display:block-inline;
-		margin:20%;
-
-		#header{
-			width:100;
-		}
-		#body{
-			width:100;
-		}
+html{
+	body{
+		background: @backgroundcolor;
+		font-family: 'Taviraj', serif;
 	}
+
 
 }
 
-#viewcontent{
-	width: 80%;
-	margin: 10%;
+.container{
 
-	table{
-		width: 100%;
-		margin-top: 50px;
 
-		th{
-			text-align: center;
+	width: 100%;
+	display: block;
+	float: left;
+
+
+	#indexcontent{
+		background:@bodycolor;
+		width: 90%;
+		margin-left: 10%;
+		padding: 5px;
+		display: block;
+		float: left;
+
+
+		h2{
+			margin-top: 15px;
 		}
-		td{
-			text-align: center;
-		}
-
-
-
-		#num{
-			width: 20%;
-		}
-	}
-}
-
-#indexcontent{
-		width: 80%;
-		margin: 10%;
-
 		form{
-			width: 100%;
-			margin-top: 50px;
-		}
-		input
-		{
-			margin: 2px;
-			float: left;
-					
-	
-		}
-		button{
-			margin: 2px;
-			float: right;
-		}
-		a{
-			margin: 2px;
-			text-decoration: none;
-			float: right;
+			padding:5%;
+			width:80%;
+			margin: 0 10%;
+			label{
+				padding: 5px;
+				width: 12%;
+				float: left;
+				display: block;
+			}
+			#project_name{
+				width: 60%;
+				float: left;
+				display: inline-block;
+			}
+			#submit{
+				width: 20%;
+				margin-left: 5px;
+				float: left;display: inline-block;
+			}
+
+			}
+
 		}
 
 
+	#viewcontent{
 
-	
+	background:@bodycolor;
+		width: 90%;
+		margin-left: 10%;
+		padding: 5px;
+		display: block;
+		float: left;
+
+		table{
+			thead{
+				color: green;
+				tr{
+					.center{
+						text-align: center;
+
+					}
+
+				tr{
+					th{}
+				}
+			}
+		}
+			tbody{
+
+
+				tr{
+
+
+					.center{
+						text-align: center;
+					}
+
+					td{
+
+
+
+						a{
+							text-decoration: none;
+							color: #000;
+							&:hover{
+								color: #3498db;
+
+							}
+						}
+					}
+				}
+
+			}
+		}
 	}
+
+	.btnback{
+		margin: 50px 0;	}
+	#precontent{}
+	#prewarncontent{}
+
+
+		.actcontent{
+		background: @bodycolor;
+			width: 90%;
+			margin-left: 10%;
+			padding: 5px;
+			display: block;
+			float: left;
+
+		
+	form{
+		padding: 5%;
+		display: block;
+		float: left;
+		width: 100%;
+
+		label{
+
+			width: 10%;
+			padding: 5px;
+			float: left;
+			display: inline-block;
+		}
+
+		.input{
+			width: 60%;
+			float: left;
+			display: inline-block;
+		}
+			.button{
+				width: 25%;
+				float: left;
+				margin: 0 5px;
+				display: inline-block;
+			}
+
+	}
+
+
+
+
+		}
+		.actdetail{
+
+			background:@bodycolor;
+				width: 90%;
+				margin-left: 10%;
+				padding: 5px;
+				display: block;
+				float: left;
+
+
+
+			label{
+
+			}
+
+			table{
+
+
+				thead{
+					color: #3498db;
+					tr{
+						.center{
+
+							text-align: center;
+						}
+						.w{
+							width: 150px;
+						}
+						th{}
+					}
+				}
+				tbody{
+					tr{
+						.center{
+							width: 150px;
+							text-align: center;
+						}
+						td{
+
+						}
+					}
+				}
+			}
+
+
+		}
+
+
+}

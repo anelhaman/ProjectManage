@@ -1,49 +1,247 @@
-.container #content {
+/**
+ * Global Reset of all HTML Elements
+ *
+ * Resetting all of our HTML Elements ensures a smoother
+ * visual transition between browsers. If you don't believe me,
+ * try temporarily commenting out this block of code, then go
+ * and look at Mozilla versus Safari, both good browsers with
+ * a good implementation of CSS. The thing is, all browser CSS
+ * defaults are different and at the end of the day if visual
+ * consistency is what we're shooting for, then we need to
+ * make sure we're resetting all spacing elements.
+ *
+ */
+html,
+body {
+  border: 0;
+  font-family: "Helvetica-Neue", "Helvetica", Arial, sans-serif;
+  line-height: 1.5;
+  margin: 0;
+  padding: 0;
+}
+div,
+span,
+object,
+iframe,
+img,
+table,
+caption,
+thead,
+tbody,
+tfoot,
+tr,
+tr,
+td,
+article,
+aside,
+canvas,
+details,
+figure,
+hgroup,
+menu,
+nav,
+footer,
+header,
+section,
+summary,
+mark,
+audio,
+video {
+  border: 0;
+  margin: 0;
+  padding: 0;
+}
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+p,
+blockquote,
+pre,
+a,
+abbr,
+address,
+cit,
+code,
+del,
+dfn,
+em,
+ins,
+q,
+samp,
+small,
+strong,
+sub,
+sup,
+b,
+i,
+hr,
+dl,
+dt,
+dd,
+ol,
+ul,
+li,
+fieldset,
+legend,
+label {
+  border: 0;
+  font-size: 100%;
+  vertical-align: baseline;
+  margin: 0;
+  padding: 0;
+}
+article,
+aside,
+canvas,
+figure,
+figure img,
+figcaption,
+hgroup,
+footer,
+header,
+nav,
+section,
+audio,
+video {
+  display: block;
+}
+table {
+  border-collapse: separate;
+  border-spacing: 0;
+}
+table caption,
+table th,
+table td {
+  text-align: left;
+  vertical-align: middle;
+}
+a img {
+  border: 0;
+}
+:focus {
+  outline: 0;
+}
+html body {
+  background: #bdc3c7;
+  font-family: 'Taviraj', serif;
+}
+.container {
   width: 100%;
-  display: block-inline;
-  margin: 20%;
-}
-.container #content #header {
-  width: 100;
-}
-.container #content #body {
-  width: 100;
-}
-#viewcontent {
-  width: 80%;
-  margin: 10%;
-}
-#viewcontent table {
-  width: 100%;
-  margin-top: 50px;
-}
-#viewcontent table th {
-  text-align: center;
-}
-#viewcontent table td {
-  text-align: center;
-}
-#viewcontent table #num {
-  width: 20%;
-}
-#indexcontent {
-  width: 80%;
-  margin: 10%;
-}
-#indexcontent form {
-  width: 100%;
-  margin-top: 50px;
-}
-#indexcontent input {
-  margin: 2px;
+  display: block;
   float: left;
 }
-#indexcontent button {
-  margin: 2px;
-  float: right;
+.container #indexcontent {
+  background: #ffffff;
+  width: 90%;
+  margin-left: 10%;
+  padding: 5px;
+  display: block;
+  float: left;
 }
-#indexcontent a {
-  margin: 2px;
+.container #indexcontent h2 {
+  margin-top: 15px;
+}
+.container #indexcontent form {
+  padding: 5%;
+  width: 80%;
+  margin: 0 10%;
+}
+.container #indexcontent form label {
+  padding: 5px;
+  width: 12%;
+  float: left;
+  display: block;
+}
+.container #indexcontent form #project_name {
+  width: 60%;
+  float: left;
+  display: inline-block;
+}
+.container #indexcontent form #submit {
+  width: 20%;
+  margin-left: 5px;
+  float: left;
+  display: inline-block;
+}
+.container #viewcontent {
+  background: #ffffff;
+  width: 90%;
+  margin-left: 10%;
+  padding: 5px;
+  display: block;
+  float: left;
+}
+.container #viewcontent table thead {
+  color: green;
+}
+.container #viewcontent table thead tr .center {
+  text-align: center;
+}
+.container #viewcontent table tbody tr .center {
+  text-align: center;
+}
+.container #viewcontent table tbody tr td a {
   text-decoration: none;
-  float: right;
+  color: #000;
+}
+.container #viewcontent table tbody tr td a:hover {
+  color: #3498db;
+}
+.container .btnback {
+  margin: 50px 0;
+}
+.container .actcontent {
+  background: #ffffff;
+  width: 90%;
+  margin-left: 10%;
+  padding: 5px;
+  display: block;
+  float: left;
+}
+.container .actcontent form {
+  padding: 5%;
+  display: block;
+  float: left;
+  width: 100%;
+}
+.container .actcontent form label {
+  width: 10%;
+  padding: 5px;
+  float: left;
+  display: inline-block;
+}
+.container .actcontent form .input {
+  width: 60%;
+  float: left;
+  display: inline-block;
+}
+.container .actcontent form .button {
+  width: 25%;
+  float: left;
+  margin: 0 5px;
+  display: inline-block;
+}
+.container .actdetail {
+  background: #ffffff;
+  width: 90%;
+  margin-left: 10%;
+  padding: 5px;
+  display: block;
+  float: left;
+}
+.container .actdetail table thead {
+  color: #3498db;
+}
+.container .actdetail table thead tr .center {
+  text-align: center;
+}
+.container .actdetail table thead tr .w {
+  width: 150px;
+}
+.container .actdetail table tbody tr .center {
+  width: 150px;
+  text-align: center;
 }

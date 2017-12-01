@@ -1,4 +1,4 @@
-<?php  
+<?php
 require_once 'autoload.php';
 
 ?>
@@ -24,7 +24,7 @@ require_once 'autoload.php';
 
 <?php include_once'header.php';?>
 
-	
+
 	<div class="container">
 			<form class="form-horizontal" action="added.php" method="POST">
 				<fieldset>
@@ -34,10 +34,10 @@ require_once 'autoload.php';
 
 				<!-- Text input-->
 				<div class="form-group">
-				  <label class="col-md-4 control-label" for="tel">เบอร์โทร</label>  
+				  <label class="col-md-4 control-label" for="tel">เบอร์โทร</label>
 				  <div class="col-md-5">
-				  <input id="tel" name="tel" type="number" maxlength="10" placeholder="กรอกเบอร์โทร" class="form-control input-md" required="" >
-				    
+				  <input id="tel" name="tel" type="number" maxlength="10" placeholder="กรอกเบอร์โทร" class="form-control input-md" required="" autofocus>
+
 				  </div>
 				</div>
 
@@ -46,25 +46,25 @@ require_once 'autoload.php';
 				  <label class="col-md-4 control-label" for="password">รหัสผ่าน</label>
 				  <div class="col-md-5">
 				    <input id="password" name="password" type="password" placeholder="ตัวเลข 4 ตัว" class="form-control input-md" required="" maxlength="4">
-				    
+
 				  </div>
 				</div>
 
 				<!-- Text input-->
 				<div class="form-group">
-				  <label class="col-md-4 control-label" for="name">ชื่อจริง</label>  
+				  <label class="col-md-4 control-label" for="name">ชื่อจริง</label>
 				  <div class="col-md-5">
 				  <input id="name" name="name" type="text" placeholder="กรอกชื่อจริง" class="form-control input-md" required="">
-				    
+
 				  </div>
 				</div>
 
 				<!-- Text input-->
 				<div class="form-group">
-				  <label class="col-md-4 control-label" for="lastname">นามสกุล</label>  
+				  <label class="col-md-4 control-label" for="lastname">นามสกุล</label>
 				  <div class="col-md-5">
 				  <input id="lastname" name="lastname" type="text" placeholder="กรอกนามสกุล" class="form-control input-md" required="">
-				    
+
 				  </div>
 				</div>
 
@@ -81,7 +81,7 @@ require_once 'autoload.php';
 
 	</div>
 
-	
-	
+
+
 </body>
 </html>

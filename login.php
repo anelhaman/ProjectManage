@@ -23,6 +23,7 @@ if($user_online) {
 <title><?php echo TITLE;?></title>
 
 <link rel="stylesheet" type="text/css" href="css/style.css"/>
+<link rel="stylesheet" href="css/test.css">
 <link rel="stylesheet" type="text/css" href="plugin/font-awesome/css/font-awesome.min.css"/>
 <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet">
 </head>

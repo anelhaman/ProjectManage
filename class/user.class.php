@@ -11,6 +11,10 @@ class User{
     public function __construct() {
     	global $wpdb;
     	$this->db = $wpdb;
+
+
+
+
     }
 
     public function get($cid){
@@ -29,13 +33,6 @@ class User{
         //print_r($dataset);
     }
 
-    public function getPrename($cid){
-        $this->db->query('SELECT TITLE FROM tsalary WHERE ID_CARD = :cid LIMIT 1');
-        $this->db->bind(':cid',$cid);
-        $this->db->execute();
-        $dataset = $this->db->single();
-        return $dataset['TITLE'];
-    }
 
     public function changePassword($cid,$oldpassword,$newpassword){
     	$this->db->query('UPDATE member SET Password = :newpassword WHERE ID_CARD = :cid AND password = :oldpassword');
@@ -109,7 +106,8 @@ class User{
 
     public function login($tel,$password){
             // $email          = filter_var(strip_tags(trim($email)),FILTER_SANITIZE_EMAIL);
-        $username       = trim($username);
+
+        $tel            = trim($tel);
         $password       = trim($password);
         $password       = hash('sha512',$password);
         $cookie_time    = time() + 3600 * 24 * 12; // Cookie Time (1 year)
@@ -119,6 +117,8 @@ class User{
         $this->db->bind(':tel',$tel);
         $this->db->execute();
         $user_data = $this->db->single();
+
+
 
         if(true){
             if($password == $user_data['pass']){
@@ -243,6 +243,9 @@ class User{
         $dataset = $this->db->single();
         
         return ($dataset['id']); 
+    }
+    public function getId(){
+            return $this->id;
     }
     public function getPassfromId($id){
 
